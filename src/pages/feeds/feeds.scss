@@ -1,0 +1,33 @@
+.headline__right {
+  align-items: center;
+}
+
+.icon {
+  color: #000;
+  width: 24px;
+
+  &_logout {
+    width: 25px;
+  }
+}
+
+.stories {
+  overflow: hidden;
+
+  &__item:first-child {
+    margin-left: 0;
+  }
+}
+
+.feeds {
+  &__list {
+    width: 979px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

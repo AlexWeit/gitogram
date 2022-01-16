@@ -1,4 +1,4 @@
-# gitogram.loc
+# Gitogram
 Study-project for Loftschool based on Vue-cli
 
 ## Project setup

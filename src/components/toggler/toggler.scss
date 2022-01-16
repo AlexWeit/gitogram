@@ -1,0 +1,24 @@
+.toggler {
+  &.button {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+}
+.icon {
+  width: 10px;
+  transform: rotate(180deg);
+  transition: .4s;
+  color: #000;
+}
+
+.active {
+  .icon {
+    transform: rotate(0deg);
+  }
+}

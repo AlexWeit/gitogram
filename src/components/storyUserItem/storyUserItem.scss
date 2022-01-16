@@ -1,0 +1,14 @@
+.avatar {
+
+  &__wrap {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #A6328D;
+    padding: 4px;
+  }
+
+  border-radius: 50%;
+  overflow: hidden;
+}
