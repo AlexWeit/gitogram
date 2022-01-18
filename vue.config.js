@@ -1,7 +1,7 @@
-const path = require("path");
-const vueSrc = "./src";
+const path = require('path')
+const vueSrc = './src'
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "gitogram/dist" : "/",
+  publicPath: process.env.NODE_ENV === 'production' ? 'gitogram/dist/' : '/',
   css: {
     requireModuleExtension: true
   },
@@ -10,11 +10,11 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, vueSrc),
+        '@': path.resolve(__dirname, vueSrc),
 
-        _api: path.resolve(__dirname, "src/api/modules")
+        _api: path.resolve(__dirname, 'src/api/modules')
       },
-      extensions: [".js", ".vue", ".json"]
+      extensions: ['.js', '.vue', '.json']
     }
   }
 }
