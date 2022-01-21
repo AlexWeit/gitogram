@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import xProgress from '../xProgress/xProgress'
-import user from '../user/user'
-import xButton from '../xButton/xButton'
+import { xProgress } from '@/components/xProgress'
+import { user } from '@/components/user'
+import { xButton } from '@/components/xButton'
 
 export default {
   name: 'Slide',

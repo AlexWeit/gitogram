@@ -1,7 +1,7 @@
 <template>
   <div class="c-feed mt-32">
     <div class="feed__user">
-      <user :avatar="avatarUrl" :username="username"></user>
+      <user :avatarUrl="avatarUrl" :username="username"></user>
     </div>
     <div class="feed__card mt-16">
       <slot name="card"></slot>

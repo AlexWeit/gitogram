@@ -14,19 +14,17 @@
             </div>
           </div>
         </div>
-
       </template>
       <template #content>
         <div class="stories">
           <ul class="stories__list fl">
             <li
               class="stories__item mr-15 ml-15"
-              v-for="story in stories"
-              :key="story.id"
+              v-for="item in items"
+              :key="item.id"
             >
               <story-user-item
-                :avatar="story.avatar"
-                :username="story.username"
+                v-bind="getFeedData(item)"
                 :size="avatar_l"
                 @onPress="handlePress(story.id)"
               ></story-user-item>
@@ -40,12 +38,14 @@
     <ul class="feeds__list">
       <li
         class="feeds__item mt-24"
-        v-for="item in stories"
+        v-for="item in items"
         :key="item.id"
       >
-        <feed-item :avatarUrl="item.avatar" :username="item.username">
+        <feed-item
+          v-bind="getFeedData(item)"
+        >
           <template #card>
-            <card :title="item.title"></card>
+            <card v-bind="getFeedData(item)"></card>
           </template>
         </feed-item>
       </li>
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import * as api from '@/api'
 import { topline } from '@/components/topline'
 import { avatar } from '@/components/avatar'
 import { icon } from '@/icons'
@@ -63,7 +64,7 @@ import { feedItem } from '@/components/feed'
 import { card } from '@/components/card'
 
 export default {
-  name: 'feeds',
+  name: 'Feeds',
   components: {
     topline,
     avatar,
@@ -74,10 +75,31 @@ export default {
   },
   data () {
     return {
+      items: [],
       stories,
       avatar_s: 'avatar_s',
       avatar_m: 'avatar_m',
       avatar_l: 'avatar_l'
+    }
+  },
+  methods: {
+    getFeedData (item) {
+      return {
+        title: item.name,
+        description: item.description,
+        username: item.owner.login,
+        avatarUrl: item.owner.avatar_url,
+        stars: item.stargazers_count,
+        forks: item.forks_count
+      }
+    }
+  },
+  async created () {
+    try {
+      const { data } = await api.trendings.getTrendings()
+      this.items = data.items
+    } catch (error) {
+      console.log(error)
     }
   }
 }

@@ -4,13 +4,10 @@
       <h2 class="card__title mb-16">{{ title }}</h2>
     </div>
     <div class="card__desc mb-32">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti excepturi itaque minus natus obcaecati
-      vel vitae voluptatem? Ad aspernatur consequuntur dicta libero odio quia repellat voluptatibus. Aliquam asperiores
-      atque consectetur corporis cumque delectus dicta dolores, eum incidunt ipsa laudantium magnam maxime, nam nemo
-      nobis rem sequi sit. Facilis, quis.
+      {{ description }}
     </div>
     <div class="card__stats">
-      <stats :stars="10" :forks="5"></stats>
+      <stats :stars="stars" :forks="forks"></stats>
     </div>
   </div>
 </template>
@@ -26,6 +23,18 @@ export default {
     title: {
       type: String,
       default: 'default title'
+    },
+    description: {
+      type: String,
+      default: 'Some feed description'
+    },
+    stars: {
+      type: Number,
+      required: true
+    },
+    forks: {
+      type: Number,
+      required: true
     }
   }
 }

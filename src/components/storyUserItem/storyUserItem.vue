@@ -4,7 +4,7 @@
     @click="$emit('onPress')"
   >
     <div class="avatar__wrap">
-      <avatar :avatar="avatar" :size="size"></avatar>
+      <avatar :avatarUrl="avatarUrl" :size="size"></avatar>
     </div>
     <div class="username mt-10">{{ username }}</div>
   </button>
@@ -19,7 +19,7 @@ export default {
     avatar
   },
   props: {
-    avatar: {
+    avatarUrl: {
       type: String,
       required: true
     },

@@ -2,7 +2,7 @@
   <div class="user">
     <avatar
       class="user__avatar mr-12"
-      :avatar="avatar"
+      :avatarUrl="avatarUrl"
       :size="size"
     ></avatar>
     <div>
@@ -21,7 +21,7 @@ export default {
     avatar
   },
   props: {
-    avatar: {
+    avatarUrl: {
       type: String,
       required: true,
       default: 'https://picsum.photos/300/300'

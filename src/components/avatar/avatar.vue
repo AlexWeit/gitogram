@@ -1,6 +1,6 @@
 <template>
   <div class="avatar" :class="size">
-    <img :src="avatar" class="img" alt="avatar">
+    <img :src="avatarUrl" class="img" alt="avatar">
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'Avatar',
   props: {
-    avatar: {
+    avatarUrl: {
       type: String,
       default: 'https://picsum.photos/300/300',
       required: true
