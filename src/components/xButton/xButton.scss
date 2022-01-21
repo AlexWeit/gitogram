@@ -1,0 +1,27 @@
+.c-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: 44px;
+  background: #31AE54;
+  border-radius: 5px;
+
+  .btn-text {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+  }
+
+  &:hover {
+    background: #9E9E9E;
+
+    span.btn-text {
+      content: attr(data-hover-text);
+    }
+
+  }
+
+}

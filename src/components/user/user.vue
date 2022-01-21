@@ -23,13 +23,13 @@ export default {
   props: {
     avatar: {
       type: String,
-      required: true
-      // default: 'https://picsum.photos/300/300'
+      required: true,
+      default: 'https://picsum.photos/300/300'
     },
     username: {
       type: String,
-      required: true
-      // default: 'John Doe'
+      required: true,
+      default: 'Default User'
     },
     type: {
       type: String,
