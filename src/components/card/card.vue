@@ -30,10 +30,12 @@ export default {
     },
     stars: {
       type: Number,
+      default: 0,
       required: true
     },
     forks: {
       type: Number,
+      default: 0,
       required: true
     }
   }

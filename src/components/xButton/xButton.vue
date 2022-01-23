@@ -17,7 +17,8 @@ export default {
   name: 'XButton',
   props: {
     hoverText: {
-      type: String
+      type: String,
+      default: 'hoverText'
     }
   },
   computed: {

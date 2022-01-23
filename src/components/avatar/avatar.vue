@@ -5,8 +5,16 @@
 </template>
 
 <script>
+
 export default {
   name: 'Avatar',
+  data () {
+    return {
+      avatar_s: 'avatar_s',
+      avatar_m: 'avatar_m',
+      avatar_l: 'avatar_l'
+    }
+  },
   props: {
     avatarUrl: {
       type: String,
