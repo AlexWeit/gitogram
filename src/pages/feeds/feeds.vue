@@ -1,9 +1,13 @@
 <template>
+  <div><router-link to="/testPage/">Go to testPage</router-link></div>
+  <div><router-link to="/user/">Go to user Page</router-link></div>
+  <div><router-link to="/storiesPage">Go to storiesPage</router-link></div>
+
   <div class="topline">
     <topline>
       <template #headline>
         <div class="headline__wrap fl-jc-between">
-          <h1 class="mainTitle">Gitogram /</h1>
+          <logo :color="logo_black"></logo>
           <div class="headline__right fl">
             <div class="icon icon_home mr-12">
               <icon name="home"></icon>
@@ -55,6 +59,7 @@
 
 <script>
 import * as api from '@/api'
+import { logo } from '@/components/logo'
 import { topline } from '@/components/topline'
 import { avatar } from '@/components/avatar'
 import { icon } from '@/icons'
@@ -66,6 +71,7 @@ import { card } from '@/components/card'
 export default {
   name: 'Feeds',
   components: {
+    logo,
     topline,
     avatar,
     icon,
@@ -79,7 +85,9 @@ export default {
       stories,
       avatar_s: 'avatar_s',
       avatar_m: 'avatar_m',
-      avatar_l: 'avatar_l'
+      avatar_l: 'avatar_l',
+      logo_white: 'logo_white',
+      logo_black: 'logo_black'
     }
   },
   methods: {

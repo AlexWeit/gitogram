@@ -22,7 +22,7 @@ export default {
       this.active = true
     })
 
-    this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish);
+    this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
   },
   beforeUnmount () {
     this.$refs.indicator.removeEventListener(

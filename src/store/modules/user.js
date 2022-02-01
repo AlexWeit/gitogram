@@ -1,10 +1,5 @@
-import { createStore } from 'vuex'
-// import user from './modules/user'
-
-export default createStore({
-  // modules: {
-  //   user
-  // }
+export default {
+  namespaced: true,
   state: {
     foo: 'bar',
     nextFoo: 'bar_2',
@@ -81,4 +76,4 @@ export default createStore({
       }
     }
   }
-})
+}
