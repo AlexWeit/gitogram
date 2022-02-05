@@ -18,7 +18,7 @@ export default {
   props: {
     hoverText: {
       type: String,
-      default: 'hoverText'
+      default: 'default hoverText'
     }
   },
   computed: {

@@ -1,8 +1,4 @@
 <template>
-  <div><router-link to="/testPage/">Go to testPage</router-link></div>
-  <div><router-link to="/user/">Go to user Page</router-link></div>
-  <div><router-link to="/storiesPage">Go to storiesPage</router-link></div>
-
   <div class="topline">
     <topline>
       <template #headline>
@@ -24,13 +20,14 @@
           <ul class="stories__list fl">
             <li
               class="stories__item mr-15 ml-15"
-              v-for="item in items"
-              :key="item.id"
+              v-for="{ id, owner } in trendings"
+              :key="id"
             >
               <story-user-item
-                v-bind="getFeedData(item)"
+                :avatarUrl="owner.avatar_url"
+                :username="owner.login"
                 :size="avatar_l"
-                @onPress="handlePress(story.id)"
+                @onPress="$router.push({name: 'storiesPage', params: { initialSlide: id } })"
               ></story-user-item>
             </li>
           </ul>
@@ -42,14 +39,20 @@
     <ul class="feeds__list">
       <li
         class="feeds__item mt-24"
-        v-for="item in items"
-        :key="item.id"
+        v-for="{ id, owner, name, description, stargazers_count, forks_count } in trendings"
+        :key="id"
       >
         <feed-item
-          v-bind="getFeedData(item)"
+          :avatarUrl="owner.avatar_url"
+          :username="owner.login"
         >
           <template #card>
-            <card v-bind="getFeedData(item)"></card>
+            <card
+              :title="name"
+              :description="description"
+              :stars="stargazers_count"
+              :forks="forks_count"
+            ></card>
           </template>
         </feed-item>
       </li>
@@ -58,6 +61,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import * as api from '@/api'
 import { logo } from '@/components/logo'
 import { topline } from '@/components/topline'
@@ -67,6 +71,7 @@ import { storyUserItem } from '@/components/storyUserItem'
 import stories from './dataUsers.json'
 import { feedItem } from '@/components/feed'
 import { card } from '@/components/card'
+import trendings from '../../store/modules/trendings'
 
 export default {
   name: 'Feeds',
@@ -90,25 +95,39 @@ export default {
       logo_black: 'logo_black'
     }
   },
+  computed: {
+    ...mapState({
+      trendings: (state) => state.trendings.data
+      // starred: (state) => state.starred.data
+    })
+  },
   methods: {
-    getFeedData (item) {
-      return {
-        title: item.name,
-        description: item.description,
-        username: item.owner.login,
-        avatarUrl: item.owner.avatar_url,
-        stars: item.stargazers_count,
-        forks: item.forks_count
-      }
-    }
+    // method 'getFeedData' - gets data from api without vuex
+    // getFeedData (item) {
+    //   return {
+    //     title: item.name,
+    //     description: item.description,
+    //     username: item.owner.login,
+    //     avatarUrl: item.owner.avatar_url,
+    //     stars: item.stargazers_count,
+    //     forks: item.forks_count
+    //   }
+    // },
+    ...mapActions({
+      fetchTrendings: 'trendings/fetchTrendings'
+    })
   },
   async created () {
+    console.log(trendings)
     try {
       const { data } = await api.trendings.getTrendings()
       this.items = data.items
     } catch (error) {
       console.log(error)
     }
+  },
+  mounted () {
+    this.fetchTrendings()
   }
 }
 </script>

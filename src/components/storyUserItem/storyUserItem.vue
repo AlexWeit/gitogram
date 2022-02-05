@@ -18,6 +18,7 @@ export default {
   components: {
     avatar
   },
+  emits: ['onPress'],
   props: {
     avatarUrl: {
       type: String,

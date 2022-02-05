@@ -1,14 +1,29 @@
 .c-slide {
-  width: 302px;
-  height: 538px;
-  border-radius: 8px;
-  border: 1px solid #CACACA;
-  background-color: #FFFFFF;
+  width: 375px;
+  height: 667px;
+  transform: scale(.8);
+  transition: .4s;
   position: relative;
   margin: 0 auto;
 
+  &.active {
+    transform: scale(1);
+    z-index: 2;
+  }
+
+  &__container {
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    color: #404040;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .btn {
-    display: none;
+    display: flex;
+    z-index: 3;
     position: absolute;
     top: 50%;
     border: 1px solid #000000;
@@ -16,11 +31,11 @@
     padding: 9px;
     background-color: #FFFFFF;
 
-    &-next {
+    &-prev {
       left: -56px;
     }
 
-    &-prev {
+    &-next {
       right: -56px;
     }
 
@@ -35,21 +50,12 @@
       }
     }
   }
-
-  &.active {
-    width: 375px;
-    height: 667px;
-
-    .btn {
-      display: block;
-    }
-  }
 }
 
 .slide {
 
   &__content {
-    height: 499px;
+    flex: 1;
     overflow-y: scroll;
     border-top: 1px solid #CACACA;
     border-bottom: 1px solid #CACACA;
@@ -90,8 +96,23 @@
     }
   }
 
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__info {
+    flex: 1;
+    font-size: 10px;
+  }
+
   &__button {
+    margin-top: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    padding: 30px 52px;
+    box-shadow: 0 0 10px rgba(00, 00, 00, .3);
   }
 }

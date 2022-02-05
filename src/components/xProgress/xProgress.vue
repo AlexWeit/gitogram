@@ -8,10 +8,16 @@
 export default {
   data () {
     return {
-      active: false
+      // active: false
     }
   },
   emits: ['onFinish'],
+  props: {
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     emitOnFinish () {
       this.$emit('onFinish')
@@ -19,7 +25,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this.active = true
+      // this.props.active = true
     })
 
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)

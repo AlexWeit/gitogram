@@ -1,23 +1,27 @@
 import { feeds } from '../pages/feeds'
 import { testPage } from '../pages/testPage'
-import { user } from '../pages/user'
+import { testUser } from '../pages/testUser'
 import { storiesPage } from '../pages/storiesPage'
 
 export default [
   {
     path: '/',
+    name: 'feeds',
     component: feeds
   },
   {
     path: '/testPage',
+    name: 'testPage',
     component: testPage
   },
   {
-    path: '/user',
-    component: user
+    path: '/testUser',
+    name: 'testUser',
+    component: testUser
   },
   {
     path: '/storiesPage',
+    name: 'storiesPage',
     component: storiesPage
   }
 ]

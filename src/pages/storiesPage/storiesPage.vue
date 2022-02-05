@@ -2,10 +2,12 @@
   <div class="wrapper-inner">
     <header class="header">
       <div class="x-container">
-        <button class="logo-btn">
+        <button class="logo-btn"
+                @click="$router.push({name: 'feeds'})">
           <logo :color="logo_white"></logo>
         </button>
-        <button class="close-btn">
+        <button class="close-btn"
+                @click="$router.push({name: 'feeds'})">
           <div class="icon icon_close">
             <icon name="close"></icon>
           </div>
@@ -13,7 +15,7 @@
       </div>
     </header>
     <div class="content">
-      <stories-slider></stories-slider>
+      <stories-slider :initialSlide="Number($route.params.initialSlide)"></stories-slider>
     </div>
   </div>
 </template>
