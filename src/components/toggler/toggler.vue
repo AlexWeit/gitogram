@@ -4,7 +4,7 @@
     <div class="toggler__inner">
       <span>{{ buttonText }} issues</span>
       <span>
-        <div class="icon icon_home ml-5">
+        <div class="icon icon_triangle ml-5">
           <icon name="triangle"></icon>
         </div>
       </span>

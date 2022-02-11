@@ -8,19 +8,23 @@
         <li
           class="stories__item"
           ref="item"
-          v-for="({id, owner, readme}, ndx) in trendings"
+          v-for="({id, owner, readme, following}, ndx) in trendings"
           :key="id"
         >
+<!--          <pre>{{trendings}}</pre>-->
           <slide
+            :id="id"
             :avatarUrl="owner.avatar_url"
             :username="owner.login"
             :content="readme"
             :active="slideNdx === ndx"
+            :following="following"
             :loading="slideNdx === ndx && loading"
             :buttonsShown="activeBtns"
             @onNextSlide="handleSlide(ndx + 1)"
             @onPrevSlide="handleSlide(ndx - 1)"
             @onProgressFinish="handleSlide(ndx + 1)"
+            @onFollow="starRepo(id)"
           ></slide>
         </li>
       </ul>
@@ -31,6 +35,7 @@
 <script>
 import { slide } from '@/components/slide'
 import { mapState, mapActions } from 'vuex'
+import starred from '../../store/modules/starred'
 
 export default {
   components: {
@@ -63,7 +68,8 @@ export default {
   methods: {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
-      fetchReadme: 'trendings/fetchReadme'
+      fetchReadme: 'trendings/fetchReadme',
+      starRepo: 'starred/starRepo'
     }),
     async fetchReadmeForActiveSlide () {
       const { id, owner, name } = this.trendings[this.slideNdx]

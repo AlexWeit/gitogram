@@ -1,10 +1,15 @@
 <template>
-  <div class="c-spinner"></div>
+  <div class="c-spinner" :class="color"></div>
 </template>
 
 <script>
 export default {
-  name: 'Spinner'
+  name: 'Spinner',
+  props: {
+    color: {
+      type: String
+    }
+  }
 }
 </script>
 
@@ -51,6 +56,19 @@ export default {
       left: 0;
       bottom: 0;
       right: 0;
+    }
+
+    &.white {
+      background: #FFFFFF;
+      background: -moz-linear-gradient(left, #FFFFFF 10%, rgba(255, 255, 255, 0) 42%);
+      background: -webkit-linear-gradient(left, #FFFFFF 10%, rgba(255, 255, 255, 0) 42%);
+      background: -o-linear-gradient(left, #FFFFFF 10%, rgba(255, 255, 255, 0) 42%);
+      background: -ms-linear-gradient(left, #FFFFFF 10%, rgba(255, 255, 255, 0) 42%);
+      background: linear-gradient(to right, #FFFFFF 10%, rgba(255, 255, 255, 0) 42%);
+
+      &:before {
+        background: #FFFFFF;
+      }
     }
   }
 

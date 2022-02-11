@@ -5,7 +5,7 @@
   align-items: center;
   width: 270px;
   height: 44px;
-  background: #31AE54;
+  //background: #31AE54;
   border-radius: 5px;
 
   .btn-text {
@@ -15,9 +15,39 @@
     color: #FFFFFF;
   }
 
-  &.hover-text {
+  &.size_s {
+    padding: 6px 28px;
+    font-size: 12px;
+  }
+
+  &.size_m {
+    padding: 10px 50px;
+    font-weight: bold;
+    font-size: 16px;
+    background: #f0f0f0;
+  }
+
+  &.theme_grey {
+    background: #9E9E9E;
+
+    &:hover {
+      background: #31AE54;
+      color: #fff;
+    }
+  }
+
+  &.theme_green {
+    background: #31AE54;
+    color: #fff;
+
     &:hover {
       background: #9E9E9E;
+    }
+  }
+
+  &.hover-text {
+    &:hover {
+      //background: #9E9E9E;
 
       .btn-text {
         font-size: 0;

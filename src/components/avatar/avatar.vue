@@ -1,6 +1,6 @@
 <template>
   <div class="avatar" :class="size">
-    <img :src="avatarUrl" class="img" alt="avatar">
+    <img :src="avatarUrl" :username="username" class="img" alt="avatar">
   </div>
 </template>
 
@@ -20,6 +20,9 @@ export default {
       type: String,
       default: 'https://picsum.photos/300/300',
       required: true
+    },
+    username: {
+      type: String
     },
     size: {
       type: String,

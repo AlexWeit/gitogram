@@ -26,8 +26,14 @@
         </div>
       </div>
       <div class="slide__button">
-        <x-button :hoverText="hoverText">
-          {{following ? 'Unfollow': 'Follow'}}
+        <x-button
+          :size="size_m"
+          :theme="buttonTheme"
+          :hoverText="hoverText"
+          :loading="following.loading"
+          @click="$emit('onFollow')"
+        >
+          {{following.status ? 'Unfollow': 'Follow'}}
         </x-button>
       </div>
     </div>
@@ -66,7 +72,11 @@ export default {
   name: 'Slide',
   data () {
     return {
-      hoverText: 'Unfollow'
+      hoverText: 'Unfollow',
+      size_s: 'size_s',
+      size_m: 'size_m',
+      theme_grey: 'theme_grey',
+      theme_green: 'theme_green'
     }
   },
   components: {
@@ -77,10 +87,20 @@ export default {
     xButton,
     icon
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
+  emits: [
+    'onPrevSlide',
+    'onNextSlide',
+    'onProgressFinish',
+    'onFollow'
+  ],
   props: {
     active: Boolean,
-    loading: Boolean,
+    loading: {
+      type: Boolean
+    },
+    id: {
+      type: Number
+    },
     avatarUrl: {
       type: String,
       required: true,
@@ -95,7 +115,9 @@ export default {
       type: String
     },
     following: {
-      type: Boolean
+      status: { type: Boolean },
+      loading: { type: Boolean },
+      error: { type: Boolean }
     },
     buttonsShown: {
       type: Array,
@@ -110,6 +132,11 @@ export default {
     //   required: true,
     //   default: () => ({})
     // }
+  },
+  computed: {
+    buttonTheme () {
+      return this.following.status === true ? 'theme_grey' : 'theme_green'
+    }
   }
 }
 </script>

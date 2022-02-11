@@ -7,7 +7,14 @@ export default {
   },
   mutations: {
     SET_TRENDINGS (state, trendings) {
-      state.data = trendings
+      state.data = trendings.map((item) => {
+        item.following = {
+          status: false,
+          loading: false,
+          error: ''
+        }
+        return item
+      })
     },
     SET_README (state, payload) {
       state.data = state.data.map((repo) => {
@@ -36,7 +43,6 @@ export default {
       if (curRepo.readme !== undefined) return
       try {
         const { data } = await api.readme.getReadme({ owner, repo })
-        console.log(data)
         commit('SET_README', { id, content: data })
       } catch (error) {
         console.log('error')
