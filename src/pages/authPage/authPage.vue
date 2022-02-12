@@ -27,6 +27,7 @@ import { mapActions } from 'vuex'
 import { logo } from '@/components/logo'
 import { icon } from '@/icons'
 // import env from '../../../env'
+import axios from 'axios'
 
 export default {
   name: 'AuthPage',
@@ -52,6 +53,7 @@ export default {
     if (code) {
       const token = await this.authUserByCode(code)
       localStorage.setItem('token', token)
+      axios.defaults.headers.Authorization = `token ${token}`
       this.$router.replace({ name: 'feeds', query: { search: '' } })
       // window.location = env.redirect_url
     }

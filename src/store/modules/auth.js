@@ -10,8 +10,12 @@ export default {
 
     async authUserByCode (store, code) {
       const { data } = await api.auth.getAccessTokenByPersonalCode(code)
-
       return data.token
+    },
+
+    logout () {
+      localStorage.removeItem('token')
+      window.location.reload()
     }
   }
 }
