@@ -9,21 +9,24 @@
     <div class="toggler__wrap mt-18">
       <toggler @onToggle="toggle"></toggler>
     </div>
+    <div class="content-loader" v-if="loading">
+      <content-loader></content-loader>
+    </div>
     <div class="comments mt-12" v-if="shown">
       <ul class="comments__list">
         <li
           class="comments__item"
-          v-for="n in 5" :key="n"
+          v-for="issue in issues" :key="issue.id"
         >
           <comment
-            text="Some comment text"
-            username="John"
+            :text="issue.title"
+            :username="issue.user.login"
           ></comment>
         </li>
       </ul>
     </div>
     <div class="date mt-10">
-      <div class="day">15 may</div>
+      <div class="day">{{ normalDate }}</div>
     </div>
   </div>
 </template>
@@ -32,14 +35,24 @@
 import { user } from '@/components/user'
 import { toggler } from '@/components/toggler'
 import { comment } from '@/components/comment'
+import { contentLoader } from '@/components/contentLoader'
 
 export default {
   name: 'Feed-item',
+  data () {
+    return {
+      shown: false
+    }
+  },
   components: {
     user,
     toggler,
-    comment
+    comment,
+    contentLoader
   },
+  emits: [
+    'loadContent'
+  ],
   props: {
     avatarUrl: {
       type: String,
@@ -49,16 +62,31 @@ export default {
       type: String,
       default: 'User Loft',
       required: true
+    },
+    loading: {
+      type: Boolean
+    },
+    issues: {
+      type: Array,
+      default: () => []
+    },
+    date: {
+      type: Date,
+      required: true
     }
   },
-  data () {
-    return {
-      shown: false
+  computed: {
+    normalDate () {
+      const date = new Date(this.date)
+      return date.toLocaleString('en-EN', { month: 'short', day: 'numeric' })
     }
   },
   methods: {
     toggle (isOpened) {
       this.shown = isOpened
+      if (isOpened && this.issues.length === 0) {
+        this.$emit('loadContent')
+      }
     }
   }
 }

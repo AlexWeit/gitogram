@@ -31,7 +31,7 @@
           :theme="buttonTheme"
           :hoverText="hoverText"
           :loading="following.loading"
-          @click="$emit('onFollow')"
+          @click="$emit(following.status ? 'onUnFollow' : 'onFollow', id)"
         >
           {{following.status ? 'Unfollow': 'Follow'}}
         </x-button>
@@ -91,7 +91,8 @@ export default {
     'onPrevSlide',
     'onNextSlide',
     'onProgressFinish',
-    'onFollow'
+    'onFollow',
+    'onUnFollow'
   ],
   props: {
     active: Boolean,

@@ -23,17 +23,22 @@
         </div>
       </template>
     </topline>
+<!--    <pre>{{starred}}</pre>-->
   </div>
   <div class="feeds">
     <ul class="feeds__list">
       <li
         class="feeds__item mt-24"
-        v-for="{ id, owner, name, description, stargazers_count, forks_count } in trendings"
+        v-for="{ id, owner, name, description, stargazers_count, forks_count, issues, created_at } in starred"
         :key="id"
       >
         <feed-item
           :avatarUrl="owner.avatar_url"
           :username="owner.login"
+          :issues="issues?.data"
+          :date="new Date(created_at)"
+          :loading="issues?.loading"
+          @loadContent="loadIssues({ id, owner: owner.login, repo: name })"
         >
           <template #card>
             <card
@@ -54,22 +59,16 @@ import { mapActions, mapState } from 'vuex'
 import * as api from '@/api'
 import { xHeader } from '@/components/xHeader'
 import { topline } from '@/components/topline'
-// import { avatar } from '@/components/avatar'
-// import { icon } from '@/icons'
 import { storyUserItem } from '@/components/storyUserItem'
 import stories from './dataUsers.json'
 import { feedItem } from '@/components/feed'
 import { card } from '@/components/card'
-import trendings from '../../store/modules/trendings'
-// import starred from '../../store/modules/starred'
 
 export default {
   name: 'Feeds',
   components: {
     xHeader,
     topline,
-    // avatar,
-    // icon,
     storyUserItem,
     feedItem,
     card
@@ -105,11 +104,14 @@ export default {
     // },
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
-      fetchStarred: 'starred/fetchStarred'
-    })
+      fetchStarred: 'starred/fetchStarred',
+      fetchIssuesForRepo: 'starred/fetchIssuesForRepo'
+    }),
+    loadIssues ({ id, owner, repo }) {
+      this.fetchIssuesForRepo({ id, owner, repo })
+    }
   },
   async created () {
-    console.log(trendings)
     try {
       const { data } = await api.trendings.getTrendings()
       this.items = data.items

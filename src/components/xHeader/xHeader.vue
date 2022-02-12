@@ -11,7 +11,7 @@
       <button class="avatar"
               @click="$router.push({ name: 'userPage' })">
         <avatar
-          :src="user.avatar_url"
+          :avatarUrl="user.avatar_url"
           :username="user.login"
           :size="avatar_s"
           class="ml-16 mr-16"></avatar>
