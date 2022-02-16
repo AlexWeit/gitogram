@@ -26,6 +26,7 @@
 import { user } from '../user'
 import { xButton } from '../xButton'
 export default {
+  name: 'Subscription',
   components: {
     user,
     xButton

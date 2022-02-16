@@ -2,7 +2,7 @@
   <button :class="[{ active: show }, 'toggler button']"
           @click="onToggle">
     <div class="toggler__inner">
-      <span>{{ buttonText }} issues</span>
+      <span class="text">{{ buttonText }} issues</span>
       <span>
         <div class="icon icon_triangle ml-5">
           <icon name="triangle"></icon>
