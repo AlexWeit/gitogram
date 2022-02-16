@@ -2,6 +2,8 @@ import { authPage } from '../pages/authPage'
 import { feeds } from '../pages/feeds'
 import { storiesPage } from '../pages/storiesPage'
 import { userPage } from '../pages/userPage'
+import { repos } from '../pages/repos'
+import { following } from '../pages/following'
 import { testPage } from '../pages/testPage'
 import { testUser } from '../pages/testUser'
 
@@ -24,7 +26,22 @@ export default [
   {
     path: '/userPage',
     name: 'userPage',
-    component: userPage
+    component: userPage,
+    children: [{
+      path: '',
+      component: repos,
+      name: 'userPage',
+      props: {
+        pageTitle: 'Repositories'
+      }
+    }, {
+      path: 'following',
+      component: following,
+      name: 'following',
+      props: {
+        pageTitle: 'Following'
+      }
+    }]
   },
   {
     path: '/testPage',

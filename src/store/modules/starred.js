@@ -22,6 +22,10 @@ export default {
       })
     }
   },
+  getters: {
+    getFollowingQty: (state) => state.data.length,
+    getStarredRepo: (state) => (id) => state.data.find((repo) => repo.id === id)
+  },
   actions: {
     async fetchStarred ({ commit }, payload) {
       try {
