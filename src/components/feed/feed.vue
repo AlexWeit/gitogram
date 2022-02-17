@@ -13,7 +13,7 @@
       <content-loader></content-loader>
     </div>
     <div class="comments mt-12" v-if="shown">
-      <ul class="comments__list">
+      <ul v-if="issues.length" class="comments__list">
         <li
           class="comments__item"
           v-for="issue in issues" :key="issue.id"

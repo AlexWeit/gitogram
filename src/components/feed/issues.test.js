@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import feed from './feed'
+import feedItem from './feed'
 
-describe('feed component', () => {
+describe('feedItem component', () => {
   it('do emit of event loadContent', async () => {
-    const wrapper = mount(feed)
+    const wrapper = mount(feedItem)
 
     await wrapper.find('.toggler__wrap button').trigger('click')
 
@@ -11,16 +11,32 @@ describe('feed component', () => {
   })
 
   it('отрисует список элементов', async () => {
-    const issue = {
-      title: 'test-title',
-      user: {
-        login: 'test-name'
-      }
-    }
+    // const issue = {
+    //   title: 'test-title',
+    //   user: {
+    //     login: 'test-name'
+    //   }
+    // }
 
-    const wrapper = mount(feed, {
+    const wrapper = mount(feedItem, {
+      // propsData: {
+      //   feedItem: Array.from({ length: 6 }).map(x => issue)
+      // }
       propsData: {
-        feed: Array.from({length: 6}).map(x => issue)
+        issues: [
+          {
+            title: 'test-title',
+            user: {
+              login: 'test-name'
+            }
+          },
+          {
+            title: 'test-title',
+            user: {
+              login: 'test-name'
+            }
+          }
+        ]
       }
     })
 
@@ -31,22 +47,29 @@ describe('feed component', () => {
     expect(wrapper.findAll('.comments__item').length).toBe(6)
   })
 
-  it('не вызывает событие contentLoaded если внутри есть список issues'), async () => {
-    const issue = {
-      title: 'test-title',
-      user: {
-        login: 'test-name'
-      }
-    }
+  it('не вызывает событие contentLoaded если внутри есть список issues', async () => {
 
-    const wrapper = mount(feed, {
+    const wrapper = mount(feedItem, {
       propsData: {
-        feed: Array.from({length: 6}).map(x => issue)
+        issues: [
+          {
+            title: 'test-title',
+            user: {
+              login: 'test-name'
+            }
+          },
+          {
+            title: 'test-title',
+            user: {
+              login: 'test-name'
+            }
+          }
+        ]
       }
     })
 
     await wrapper.find('.toggler__wrap button').trigger('click')
 
-    expect(wrapper.emmited().loadContent).toBeUndefined
-  }
+    expect(wrapper.emitted().loadContent).toBeUndefined()
+  })
 })
