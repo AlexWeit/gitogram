@@ -58,3 +58,12 @@
 .stats {
   display: flex;
 }
+
+.reposts {
+  color: #000000;
+
+  &.router-link-exact-active {
+    text-decoration: none;
+    color: #000000;
+  }
+}

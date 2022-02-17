@@ -9,7 +9,7 @@
         <icon name="home"></icon>
       </button>
       <button class="avatar"
-              @click="$router.push({ name: 'userPage' })">
+              @click="$router.push({ name: 'repos' })">
         <avatar
           :avatarUrl="user.avatar_url"
           :username="user.login"

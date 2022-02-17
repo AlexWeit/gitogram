@@ -30,7 +30,7 @@ export default [
     children: [{
       path: '',
       component: repos,
-      name: 'userPage',
+      name: 'repos',
       props: {
         pageTitle: 'Repositories'
       }

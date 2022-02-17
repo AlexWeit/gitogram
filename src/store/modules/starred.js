@@ -20,6 +20,15 @@ export default {
         }
         return editedRepo
       })
+    },
+    SET_FOLLOWING: (state, payload) => {
+      state.data = state.data.map((repo) => {
+        const editedRepo = repo
+        if (payload.id === editedRepo.id) {
+          editedRepo.following = payload.following
+        }
+        return editedRepo
+      })
     }
   },
   getters: {
@@ -64,6 +73,32 @@ export default {
         })
         console.log(e)
         throw e
+      }
+    },
+    async starRepo ({ commit, getters }, id) {
+      const { name: repo, owner } = getters.getStarredRepo(id)
+      try {
+        await api.starred.starRepoApi({ owner: owner.login, repo })
+        commit('SET_FOLLOWING', {
+          id,
+          following: true
+        })
+      } catch (error) {
+        console.log(error)
+        throw error
+      }
+    },
+    async unStarRepo ({ commit, getters }, id) {
+      const { name: repo, owner } = getters.getStarredRepo(id)
+      try {
+        await api.starred.unStarRepoApi({ owner: owner.login, repo })
+        commit('SET_FOLLOWING', {
+          id,
+          following: false
+        })
+      } catch (error) {
+        console.log(error)
+        throw error
       }
     }
   }

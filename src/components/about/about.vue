@@ -12,10 +12,10 @@
         <div class="username">{{userNickname}}</div>
         <ul class="stats">
           <li class="stats-item">
-<!--            <router-link :to="{name: 'user'}" class="reposts">-->
+            <router-link :to="{name: 'repos'}" class="reposts">
               <span class="stats-int">{{repos}}</span>
               <span class="stats-title">repositories</span>
-<!--            </router-link>-->
+            </router-link>
           </li>
           <li class="stats-item">
             <router-link :to="{name: 'following'}" class="watchers">

@@ -5,7 +5,7 @@
     </div>
     <div class="error" v-else-if="error">{{error}}</div>
     <template v-else>
-      <div class="c-following__title">
+      <div class="c-following__header">
         <div class="title">Following</div>
         <div class="count">{{starred.length}}</div>
       </div>
@@ -21,6 +21,7 @@
             :avatarUrl="owner.avatar_url"
             :following="following"
             :type="owner.type"
+            :id="id"
             @onFollow="starRepo(id)"
             @onUnFollow="unStarRepo(id)"
           ></subscription>
@@ -49,15 +50,14 @@ export default {
   },
   computed: {
     ...mapState({
-      trendings: (state) => state.trendings.data,
       starred: (state) => state.starred.data
     })
   },
   methods: {
     ...mapActions({
       fetchStarred: 'starred/fetchStarred',
-      starRepo: 'trendings/starRepo',
-      unStarRepo: 'trendings/unStarRepo'
+      starRepo: 'starred/starRepo',
+      unStarRepo: 'starred/unStarRepo'
     })
   },
   async created () {
