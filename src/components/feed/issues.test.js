@@ -2,6 +2,8 @@ import { mount } from '@vue/test-utils'
 import feedItem from './feed'
 
 describe('feedItem component', () => {
+  //
+  // Test 1
   it('do emit of event loadContent', async () => {
     const wrapper = mount(feedItem)
 
@@ -10,33 +12,18 @@ describe('feedItem component', () => {
     expect(wrapper.emitted().loadContent.length).toBe(1)
   })
 
+  // Test 2
   it('отрисует список элементов', async () => {
-    // const issue = {
-    //   title: 'test-title',
-    //   user: {
-    //     login: 'test-name'
-    //   }
-    // }
+    const issue = {
+      title: 'test-title',
+      user: {
+        login: 'test-name'
+      }
+    }
 
     const wrapper = mount(feedItem, {
-      // propsData: {
-      //   feedItem: Array.from({ length: 6 }).map(x => issue)
-      // }
       propsData: {
-        issues: [
-          {
-            title: 'test-title',
-            user: {
-              login: 'test-name'
-            }
-          },
-          {
-            title: 'test-title',
-            user: {
-              login: 'test-name'
-            }
-          }
-        ]
+        issues: Array.from({ length: 6 }).map(x => issue)
       }
     })
 
@@ -47,6 +34,7 @@ describe('feedItem component', () => {
     expect(wrapper.findAll('.comments__item').length).toBe(6)
   })
 
+  // Test 3
   it('не вызывает событие contentLoaded если внутри есть список issues', async () => {
 
     const wrapper = mount(feedItem, {

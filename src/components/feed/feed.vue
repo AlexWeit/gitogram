@@ -24,6 +24,7 @@
           ></comment>
         </li>
       </ul>
+      <div v-else class="no-comments">No comments</div>
     </div>
     <div class="date mt-10">
       <div class="day">{{ normalDate }}</div>

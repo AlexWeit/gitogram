@@ -35,6 +35,7 @@ export default {
 <style scoped lang="scss">
   .logo {
     width: 174px;
+    cursor: pointer;
 
     &_white {
       color: #FFFFFF;

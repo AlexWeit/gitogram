@@ -1,27 +1,30 @@
 <template>
-  <div class="c-repos">
+  <div class="c-following">
     <div class="loader" v-if="loading">
       <spinner></spinner>
     </div>
     <div class="error" v-else-if="error">{{error}}</div>
     <template v-else>
-      <div class="c-repos__header">
-        <div class="title">Repositories</div>
-        <div class="count">{{repos.length}}</div>
+      <div class="c-following__header">
+        <div class="title">Following</div>
+        <div class="count">{{starred.length}}</div>
       </div>
-<!--          <pre>{{repos}}</pre>-->
-      <ul class="repos__list">
+<!--          <pre>{{starred}}</pre>-->
+      <ul class="following__list">
         <li
-          class="repo__item"
-          v-for="{ id, name, description, stargazers_count, forks_count } in repos"
+          class="following__item"
+          v-for="{ id, owner, following} in starred"
           :key="id"
         >
-          <card
-            :title="name"
-            :description="description"
-            :stars="stargazers_count"
-            :forks="forks_count"
-          ></card>
+          <subscription
+            :username="owner.login"
+            :avatarUrl="owner.avatar_url"
+            :following="following"
+            :type="owner.type"
+            :id="id"
+            @onFollow="starRepo(id)"
+            @onUnFollow="unStarRepo(id)"
+          ></subscription>
         </li>
       </ul>
     </template>
@@ -31,16 +34,16 @@
 <script>
 // import { mapActions, mapState } from 'vuex'
 import { spinner } from '@/components/spinner'
-import { card } from '@/components/card'
+import { subscription } from '@/components/subscription'
 
 import { useStore } from 'vuex'
 import { ref, computed } from 'vue'
 
 export default {
-  name: 'Repos',
+  name: 'Following',
   components: {
     spinner,
-    card
+    subscription
   },
   setup () {
     const loading = ref(false)
@@ -48,12 +51,14 @@ export default {
     //
     const { dispatch, state } = useStore()
     //
-    dispatch('repos/fetchRepos')
+    dispatch('starred/fetchStarred')
+    dispatch('starred/starRepo')
+    dispatch('starred/unStarRepo')
     //
-    const fetchRepos = async () => {
+    const fetchStarred = async () => {
       loading.value = true
       try {
-        await dispatch('repos/fetchRepos')
+        await dispatch('starred/fetchStarred')
       } catch (e) {
         error.value = e.message
       } finally {
@@ -64,8 +69,8 @@ export default {
     return {
       loading,
       error,
-      repos: computed(() => state.repos.data),
-      fetchRepos
+      starred: computed(() => state.starred.data),
+      fetchStarred
     }
   }
   // data () {
@@ -76,18 +81,20 @@ export default {
   // },
   // computed: {
   //   ...mapState({
-  //     repos: (state) => state.repos.data
+  //     starred: (state) => state.starred.data
   //   })
   // },
   // methods: {
   //   ...mapActions({
-  //     fetchRepos: 'repos/fetchRepos'
+  //     fetchStarred: 'starred/fetchStarred',
+  //     starRepo: 'starred/starRepo',
+  //     unStarRepo: 'starred/unStarRepo'
   //   })
   // },
   // async created () {
   //   this.loading = true
   //   try {
-  //     await this.fetchRepos()
+  //     await this.fetchStarred()
   //   } catch (e) {
   //     this.error = e.message
   //   } finally {
@@ -97,4 +104,4 @@ export default {
 }
 </script>
 
-<style src="./repos.scss" scoped lang="scss"></style>
+<style src="./following.scss" scoped lang="scss"></style>

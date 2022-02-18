@@ -29,13 +29,10 @@
 </template>
 
 <script>
-// import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import { xHeader } from '@/components/xHeader'
 import { topline } from '@/components/topline'
 import { about } from '@/components/about'
-
-import { useStore } from 'vuex'
-import { computed } from 'vue'
 
 export default {
   name: 'UserPage',
@@ -43,23 +40,6 @@ export default {
     xHeader,
     topline,
     about
-  },
-  setup () {
-    const { dispatch, state } = useStore()
-    //
-    dispatch('starred/fetchStarred')
-    // user: (state) => state.user.data
-    // //const user = computed(() => state.user.data)
-    // followingQty: 'starred/getFollowingQty'
-    // const getFollowingQty = computed(() => getters.starred.getFollowingQty)
-    return {
-      user: computed(() => state.user.data),
-      // starred: computed(() => state.starred.data),
-      // followingQty: computed(() => getters.starred.getFollowingQty)
-      followingQty: computed(() => state.starred.data.length)
-      // user,
-      // getFollowingQty
-    }
   },
   data () {
     return {
@@ -70,22 +50,26 @@ export default {
       logo_white: 'logo_white',
       logo_black: 'logo_black'
     }
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.user.data
+    }),
+    ...mapGetters({
+      followingQty: 'starred/getFollowingQty'
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchStarred: 'starred/fetchStarred'
+    })
+  },
+  created () {
+    this.fetchStarred()
   }
-  // computed: {
-  //   ...mapState({
-  //     user: (state) => state.user.data
-  //   }),
-  //   ...mapGetters({
-  //     followingQty: 'starred/getFollowingQty'
-  //   })
-  // },
-  // methods: {
-  //   ...mapActions({
-  //     fetchStarred: 'starred/fetchStarred'
-  //   })
-  // },
-  // created () {
-  //   this.fetchStarred()
+  // mounted () {
+  //   this.fetchTrendings()
+  //   this.fetchStarred({ limit: 10 })
   // }
 }
 </script>
